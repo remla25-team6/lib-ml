@@ -1,0 +1,51 @@
+name: Create GitHub Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Parse version info from tag
+      run: |
+        # GITHUB_REF is like refs/tags/v2.3.5, so strip the first 11 chars
+        VERSION=${GITHUB_REF:11}
+        MAJOR=$(echo "$VERSION" | cut -d . -f 1)
+        MINOR=$(echo "$VERSION" | cut -d . -f 2)
+        PATCH=$(echo "$VERSION" | cut -d . -f 3)
+        echo "version=$VERSION" >> $GITHUB_ENV
+        echo "version_major=$MAJOR" >> $GITHUB_ENV
+        echo "version_minor=$MINOR" >> $GITHUB_ENV
+        echo "version_patch=$PATCH" >> $GITHUB_ENV
+
+    - name: Build package
+      run: |
+        python setup.py sdist bdist_wheel
+      env:
+        VERSION: ${{ env.version }}
+        MAJOR: ${{ env.version_major }}
+        MINOR: ${{ env.version_minor }}
+        PATCH: ${{ env.version_patch }}
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
