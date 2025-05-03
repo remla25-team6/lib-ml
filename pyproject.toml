@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lib-ml"
+version = "0.0.0"  # Default version; overridden by env variable in CI/CD
+description = "Preprocessing library for sentiment analysis model"
+readme = "README.md"
+license = {text = "MIT"}
+
+dependencies = [
+    "nltk"
+]
+
+[tool.setuptools]
+packages = { find = { where = ["src"] } }
