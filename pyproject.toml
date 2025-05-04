@@ -7,10 +7,9 @@ name = "lib-ml"
 version = "0.0.0"  # Default version; overridden by env variable in CI/CD
 description = "Preprocessing library for sentiment analysis model"
 readme = "README.md"
-license = {text = "MIT"}
 
 dependencies = [
-    "nltk"
+    "nltk==3.9.1"
 ]
 
 [tool.setuptools]
