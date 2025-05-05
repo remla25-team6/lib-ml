@@ -3,7 +3,7 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
 # Download stopwords from nltk
- nltk.download('stopwords')
+nltk.download('stopwords')
 
 def preprocess(dataset, num_reviews):
     """
