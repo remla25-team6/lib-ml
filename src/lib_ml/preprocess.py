@@ -2,6 +2,9 @@ import re
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
+# Download stopwords from nltk
+ nltk.download('stopwords')
+
 def preprocess(dataset, num_reviews):
     """
     Preprocesses the reviews.
