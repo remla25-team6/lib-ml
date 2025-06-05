@@ -60,7 +60,9 @@ jobs:
           MAJOR=$(echo "$VERSION" | cut -d . -f 1)
           MINOR=$(echo "$VERSION" | cut -d . -f 2)
           PATCH=$(echo "$VERSION" | cut -d . -f 3)
-          PATCH=$((PATCH + 1))  # Increment the patch version for pre-release
+          if [[ "${{ steps.trigger.outputs.triggered_by }}" == "tag" ]]; then
+            PATCH=$((PATCH + 1))
+          fi
           DATETIME=$(date +%Y%m%d.%H%M%S)  # Use timestamp for uniqueness
           NEW_VERSION="$MAJOR.$MINOR.$PATCH-pre.$DATETIME"
           echo "version=$NEW_VERSION" >> $GITHUB_ENV
