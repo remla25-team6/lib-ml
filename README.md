@@ -66,8 +66,8 @@ To publish an official release:
    * Publishes the package as a GitHub release with the tag name.
 
 ### Pre-release
-To publish a pre-release for testing:
-1. Push a commit to the `main` branch.
+To publish a pre-release:
+1. Push a commit to the `main` branch (i.e. merge a pull request to the `main` branch).
 2. The `prerelease.yml` workflow automatically runs on every commit to `main`.
 3. It creates a pre-release using the current timestamp (e.g., `0.1.0-pre.20250625.123456`).
 4. These packages are available via:
