@@ -18,7 +18,8 @@ To install the library, you can use the following command after the release is p
 pip install git+https://github.com/remla25-team6/lib-ml@v0.1.0
 ```
 
-## Usage example
+## Usage Example
+You can use the `preprocess` method as follows:
 ```python
 import pandas as pd
 from lib_ml.preprocess import preprocess
